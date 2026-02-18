@@ -13,20 +13,6 @@ let users = [
     }
 ];
 
-
-app.get("/user/:uid", (req, res) => {
-    const uid = Number(req.params.uid);
-
-    const user = users.find(u => u.uid === uid);
-
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(user);
-});
-
-
 app.post("/user", (req, res) => {
     const { att, uid, total_sub, bonus, name } = req.body;
 
@@ -47,6 +33,21 @@ app.post("/user", (req, res) => {
         user: newUser
     });
 });
+
+app.get("/user/:uid", (req, res) => {
+    const uid = Number(req.params.uid);
+
+    const user = users.find(u => u.uid === uid);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+});
+
+
+
 
 
 app.put("/user/:uid", (req, res) => {
